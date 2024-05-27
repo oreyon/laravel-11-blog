@@ -4,14 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'slug', 'author', 'body'];
+    use HasFactory;
+    protected $fillable = ['title', 'slug', 'author_id', 'body', 'category_id'];
 
     public static function find($slug)
     {
         return self::all()->firstWhere('slug', $slug);
     }
-    use HasFactory;
+
+    // author relation
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->BelongsTo(Category::class);
+    }
 }
