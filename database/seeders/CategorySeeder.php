@@ -13,7 +13,33 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        // make 10 category
+        // make 10 fake category
         // Category::factory()->create();
+
+        // manual data input
+        Category::create([
+            'name' => 'PHP',
+            'slug' => 'php',
+        ]);
+
+        Category::create([
+            'name' => 'Laravel',
+            'slug' => 'laravel',
+        ]);
+
+        Category::create([
+            'name' => 'JavaScript',
+            'slug' => 'javascript',
+        ]);
+
+        Category::create([
+            'name' => 'Vue.js',
+            'slug' => 'vue-js',
+        ]);
+
+        Category::create([
+            'name' => 'React.js',
+            'slug' => 'react-js',
+        ]);
     }
 }

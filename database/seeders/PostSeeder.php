@@ -15,10 +15,18 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // generate fake data using factory
+        // Post::factory(100)
+        //     ->recycle(User::factory(5)->create())
+        //     ->recycle(Category::factory(5)->create())
+        //     ->create();
+
+        // or
+
         Post::factory(100)
-            ->recycle(User::factory(5)->create())
-            ->recycle(Category::factory(5)->create())
-            ->create();
+            ->recycle([
+                User::all(),
+                Category::all(),
+            ])->create();
     }
 }
