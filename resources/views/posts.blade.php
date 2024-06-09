@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slot:titleSlot>{{ $title }}</x-slot:titleSlot>
     @foreach ($posts as $post)
         <article class="py-8 max-w-screen-md border-b border-gray-300">
             <a href="/posts/{{ $post->slug }}" class="hover:underline">
