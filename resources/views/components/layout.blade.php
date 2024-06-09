@@ -10,7 +10,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="icon"
         href="https://res.cloudinary.com/dwqqrl18b/image/upload/v1716146748/file-upload/bangkiticon_bcoeit.png">
-    <title>{{ $titleSlot }}</title>
+    <title>{{ $title }}</title>
 </head>
 
 <body class="h-full">
