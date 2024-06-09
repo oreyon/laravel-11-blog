@@ -1,0 +1,11 @@
+steps:
+  - name: "gcr.io/cloud-builders/gcloud"
+    id: Build and Deploy to Dev Server
+    entrypoint: /bin/sh
+    args:
+      - "-c"
+      - |
+        set -x && \
+        gcloud compute ssh --zone=${_ENV_ZONE} ${_ENV_INST_USER}@${_ENV_INST_NAME} --command='export APP_PATH=${_ENV_APP_PATH}; cd ${_ENV_PULL_PATH}; git pull origin ${_ENV_BRANCH}; ./deploy.sh'
+options:
+  logging: CLOUD_LOGGING_ONLY
