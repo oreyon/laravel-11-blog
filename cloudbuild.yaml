@@ -7,5 +7,12 @@ steps:
       - |
         set -x && \
         gcloud compute ssh --zone=${_ENV_ZONE} ${_ENV_INST_USER}@${_ENV_INST_NAME} --command='export APP_PATH=${_ENV_APP_PATH}; cd ${_ENV_PULL_PATH}; git pull origin ${_ENV_BRANCH}; ./deploy.sh'
+substitutions:
+  _ENV_ZONE: "us-central1-a" # Replace with your instance's zone
+  _ENV_INST_USER: "your-ssh-user" # Replace with your SSH user
+  _ENV_INST_NAME: "your-instance-name" # Replace with your instance name
+  _ENV_BRANCH: "main" # Replace with the branch you want to deploy
+  _ENV_APP_PATH: "/var/www/laravel" # Path to your Laravel app on the server
+  _ENV_PULL_PATH: "/var/www/laravel" # Path where the repository is pulled
 options:
   logging: CLOUD_LOGGING_ONLY
