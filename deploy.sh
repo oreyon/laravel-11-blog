@@ -13,11 +13,14 @@ APP_PATH=${APP_PATH:-'/var/www/laravel'}
 # Continuous Integration
 echo "Build..."
 cd $APP_PATH || exit
+git pull # Pull the latest changes from the repository
 rm -rf vendor
 composer install --no-dev --optimize-autoloader
+npm install
+npm build
 
 echo "Test..."
-vendor/bin/phpunit
+/vendor/bin/phpunit
 
 # Continuous Deployment
 echo "Deploy..."
