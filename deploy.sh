@@ -9,6 +9,7 @@
 
 # Set up environment variables
 APP_PATH=${APP_PATH:-'/var/www/laravel'}
+chmod +x deploy.sh
 
 # Continuous Integration
 echo "Build..."
