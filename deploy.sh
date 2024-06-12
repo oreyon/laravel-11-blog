@@ -31,36 +31,33 @@ NVM=/home/$_ENV_INST_USER/.nvm/nvm.sh
 source $NVM
 echo "NVM Location: $NVM"
 
-# chmod +x deploy.sh
 
 # Continuous Integration
 echo "Build..."
 cd $APP_PATH
-# chown -R $(whoami):$(whoami) $APP_PATH
-# chmod 755 $APP_PATH
 
+echo "Change ownership user"
+sudo chown $USER:$USER .
+sudo chmod 775 .
+
+echo "Pulling latest changes from repository"
 git stash
 git fetch --all
 git reset --hard origin/main  
 git pull origin $ENV_BRANCH # Pull the latest changes from the repository
 
-# chown -R root:root $APP_PATH
-# chmod 755 $APP_PATH
+echo "Change ownership root"
+sudo chown root:root .
+sudo chmod 775 .
 
 rm -rf vendor
-# composer install --no-dev --optimize-autoloader
 composer update --no-dev --optimize-autoloader
 
+echo "Composer Install"
 echo "NPM INSTALL"
 npm install
 echo "NPM BUILD"
 npm run build
-
-# Ensure the web server can write to the storage and cache directories
-sudo chown -R www-data:www-data $APP_PATH/storage
-sudo chown -R www-data:www-data $APP_PATH/bootstrap/cache
-sudo chmod -R 775 $APP_PATH/storage
-sudo chmod -R 775 $APP_PATH/bootstrap/cache
 
 echo "Test..."
 cd $APP_PATH || exit
@@ -69,7 +66,6 @@ php artisan test
 # Continuous Deployment
 echo "Deploy..."
 rsync --exclude ".git" --exclude "storage" -av --delete . $APP_PATH/.
-# sudo chown -R www-data:www-data $APP_PATH/storage
 
 cd $APP_PATH || exit
 
@@ -81,6 +77,10 @@ php artisan migrate --force
 
 
 echo "Reload PHP & Nginx"
+# Ensure the web server can write to the storage and cache directories
+sudo chown -R www-data:www-data $APP_PATH/storage
+sudo chmod -R 775 $APP_PATH/storage
+
 sudo systemctl reload php8.3-fpm
 sudo systemctl reload nginx
 
