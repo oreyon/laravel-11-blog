@@ -23,12 +23,15 @@ echo "ENV_APP_PATH: $ENV_APP_PATH"
 echo "ENV_PULL_PATH: $ENV_PULL_PATH"
 echo "ENV_BRANCH: $ENV_BRANCH"
 
+# Ensure NVM script is executable
+chmod +x /home/$ENV_INST_USER/.nvm/nvm.sh
+
 # source /home/c663bsy4320/.nvm/nvm.sh
 NVM=/home/$_ENV_INST_USER/.nvm/nvm.sh
 source $NVM
 echo "NVM Location: $NVM"
 
-chmod +x deploy.sh
+# chmod +x deploy.sh
 
 # Continuous Integration
 echo "Build..."
@@ -39,17 +42,19 @@ cd $APP_PATH
 git stash
 git fetch --all
 git reset --hard origin/main  
-git pull # Pull the latest changes from the repository
+git pull origin $ENV_BRANCH # Pull the latest changes from the repository
 
 # chown -R root:root $APP_PATH
 # chmod 755 $APP_PATH
 
 rm -rf vendor
-composer install --no-dev --optimize-autoloader
-composer update
+# composer install --no-dev --optimize-autoloader
+composer update --no-dev --optimize-autoloader
 
-$NVM npm install
-$NVM npm run build
+echo "NPM INSTALL"
+npm install
+echo "NPM BUILD"
+npm run build
 
 chown -R www-data:www-data $APP_PATH/storage
 
