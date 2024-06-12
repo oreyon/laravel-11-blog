@@ -65,6 +65,9 @@ php artisan cache:clear
 echo "Database Migration..."
 php artisan migrate --force
 
+echo "Turn files permissions..."
+sudo chown -R $USER:$USER $APP_PATH
+sudo chmod -R 775 $APP_PATH
 
 echo "Ensure the web server can write to the storage and cache directories"
 sudo chown -R www-data:www-data $APP_PATH/storage
