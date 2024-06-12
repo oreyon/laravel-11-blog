@@ -34,23 +34,13 @@ echo "NVM Location: $NVM"
 
 # Continuous Integration
 echo "Build..."
-cd $APP_PATH
-
-echo "Change ownership user"
-sudo chown $USER:$USER .
-sudo chmod 775 .
-
-echo "Pulling latest changes from repository"
-git stash
-git fetch --all
-git reset --hard origin/main  
-git pull origin $ENV_BRANCH # Pull the latest changes from the repository
+cd $APP_PATH || exit
+sudo rm -rf vendor
 
 echo "Change ownership root"
 sudo chown root:root .
 sudo chmod 775 .
 
-rm -rf vendor
 composer update --no-dev --optimize-autoloader
 
 echo "Composer Install"
