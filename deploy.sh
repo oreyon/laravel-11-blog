@@ -63,6 +63,7 @@ sudo chmod -R 775 $APP_PATH/storage
 sudo chmod -R 775 $APP_PATH/bootstrap/cache
 
 echo "Test..."
+cd $APP_PATH || exit
 php artisan test
 
 # Continuous Deployment
