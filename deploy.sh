@@ -38,8 +38,8 @@ cd $APP_PATH || exit
 sudo rm -rf vendor
 
 echo "Change ownership root"
-sudo chown root:root .
-sudo chmod 775 .
+sudo chown -R root:root $APP_PATH
+sudo chmod -R 775 $APP_PATH
 
 composer update --no-dev --optimize-autoloader
 
