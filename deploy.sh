@@ -57,10 +57,10 @@ echo "NPM BUILD"
 npm run build
 
 # Ensure the web server can write to the storage and cache directories
-chown -R www-data:www-data $APP_PATH/storage
-chown -R www-data:www-data $APP_PATH/bootstrap/cache
-chmod -R 775 $APP_PATH/storage
-chmod -R 775 $APP_PATH/bootstrap/cache
+sudo chown -R www-data:www-data $APP_PATH/storage
+sudo chown -R www-data:www-data $APP_PATH/bootstrap/cache
+sudo chmod -R 775 $APP_PATH/storage
+sudo chmod -R 775 $APP_PATH/bootstrap/cache
 
 echo "Test..."
 php artisan test
