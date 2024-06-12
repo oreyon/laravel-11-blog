@@ -40,9 +40,10 @@ sudo rm -rf vendor
 echo "Change ownership root"
 sudo chown root:root $APP_PATH
 
-composer update --no-dev --optimize-autoloader
-
 echo "Composer Install"
+composer install --no-dev --optimize-autoloader
+composer update
+
 echo "NPM INSTALL"
 npm install
 echo "NPM BUILD"
