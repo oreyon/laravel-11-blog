@@ -67,6 +67,8 @@ echo "Deploy..."
 rsync --exclude ".git" --exclude "storage" -av --delete . $APP_PATH/.
 # sudo chown -R www-data:www-data $APP_PATH/storage
 
+cd $APP_PATH || exit
+
 echo "Clear cache..."
 php artisan cache:clear
 
@@ -75,9 +77,8 @@ php artisan migrate --force
 
 
 echo "Reload PHP & Nginx"
-cd
-systemctl reload php8.3-fpm
-systemctl reload nginx
+sudo systemctl reload php8.3-fpm
+sudo systemctl reload nginx
 
 # If there were stashed changes, apply them back
 git stash pop || true
