@@ -33,16 +33,16 @@ chmod +x deploy.sh
 # Continuous Integration
 echo "Build..."
 cd $APP_PATH
-chown -R $(whoami):$(whoami) $APP_PATH
-chmod 755 $APP_PATH
+# chown -R $(whoami):$(whoami) $APP_PATH
+# chmod 755 $APP_PATH
 
 git stash
 git fetch --all
 git reset --hard origin/main  
 git pull # Pull the latest changes from the repository
 
-chown -R root:root $APP_PATH
-chmod 755 $APP_PATH
+# chown -R root:root $APP_PATH
+# chmod 755 $APP_PATH
 
 rm -rf vendor
 composer install --no-dev --optimize-autoloader
