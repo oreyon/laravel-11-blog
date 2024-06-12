@@ -38,8 +38,7 @@ cd $APP_PATH || exit
 sudo rm -rf vendor
 
 echo "Change ownership root"
-sudo chown -R root:root $APP_PATH
-sudo chmod -R 775 $APP_PATH
+sudo chown root:root $APP_PATH
 
 composer update --no-dev --optimize-autoloader
 
@@ -69,7 +68,6 @@ php artisan migrate --force
 echo "Reload PHP & Nginx"
 # Ensure the web server can write to the storage and cache directories
 sudo chown -R www-data:www-data $APP_PATH/storage
-sudo chmod -R 775 $APP_PATH/storage
 
 sudo systemctl reload php8.3-fpm
 sudo systemctl reload nginx
