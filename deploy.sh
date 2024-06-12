@@ -66,10 +66,11 @@ echo "Database Migration..."
 php artisan migrate --force
 
 
-echo "Reload PHP & Nginx"
-# Ensure the web server can write to the storage and cache directories
+echo "Ensure the web server can write to the storage and cache directories"
 sudo chown -R www-data:www-data $APP_PATH/storage
+sudo chmod -R 775 $APP_PATH/storage
 
+echo "Reload PHP & Nginx"
 sudo systemctl reload php8.3-fpm
 sudo systemctl reload nginx
 
