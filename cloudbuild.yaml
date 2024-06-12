@@ -6,7 +6,7 @@ steps:
       - '-c'
       - |
         set -x && \
-        gcloud compute ssh --zone=${_ENV_ZONE} ${_ENV_INST_USER}@${_ENV_INST_NAME} --command='export _ENV_ZONE="${_ENV_ZONE}"; export _ENV_INST_USER="${_ENV_INST_USER}"; export _ENV_INST_NAME="${_ENV_INST_NAME}"; export _ENV_APP_PATH="${_ENV_APP_PATH}"; export _ENV_PULL_PATH="${_ENV_PULL_PATH}"; export _ENV_BRANCH="${_ENV_BRANCH}"; cd ${_ENV_PULL_PATH}; sudo chown -R ${_ENV_INST_USER}:${_ENV_INST_USER} ${_ENV_APP_PATH}; sudo chmod -R 775 ${_ENV_APP_PATH}; git stash; git fetch --all; git reset --hard origin/main; git pull origin ${_ENV_BRANCH}; chmod +x deploy.sh; ./deploy.sh'
+        gcloud compute ssh --zone=${_ENV_ZONE} ${_ENV_INST_USER}@${_ENV_INST_NAME} --command='export _ENV_ZONE="${_ENV_ZONE}"; export _ENV_INST_USER="${_ENV_INST_USER}"; export _ENV_INST_NAME="${_ENV_INST_NAME}"; export _ENV_APP_PATH="${_ENV_APP_PATH}"; export _ENV_PULL_PATH="${_ENV_PULL_PATH}"; export _ENV_BRANCH="${_ENV_BRANCH}"; cd ${_ENV_PULL_PATH}; sudo chown -R ${_ENV_INST_USER}:${_ENV_INST_USER} ${_ENV_APP_PATH}; sudo chmod -R 777 ${_ENV_APP_PATH}; git stash; git fetch --all; git reset --hard origin/main; git pull origin ${_ENV_BRANCH}; chmod +x deploy.sh; ./deploy.sh'
       # - '--set-secrets=BUCKET_NAME=bucket_name:latest'
 # substitutions:
 #  _ENV_ZONE: 'us-central1-a' Replace with your instance's zone
