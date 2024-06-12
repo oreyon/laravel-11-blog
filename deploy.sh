@@ -33,15 +33,16 @@ chmod +x deploy.sh
 # Continuous Integration
 echo "Build..."
 cd $APP_PATH
+chown -R $(whoami):$(whoami) $APP_PATH
+chmod 755 $APP_PATH
 
 git stash
 git fetch --all
 git reset --hard origin/main  
 git pull # Pull the latest changes from the repository
 
-# sudo chown -R $(whoami):$(whoami) $APP_PATH
-sudo chown root:root .
-sudo chmod 777 .
+chown -R root:root $APP_PATH
+chmod 755 $APP_PATH
 
 rm -rf vendor
 composer install --no-dev --optimize-autoloader
@@ -50,7 +51,7 @@ composer update
 $NVM npm install
 $NVM npm run build
 
-sudo chown -R www-data:www-data $APP_PATH/storage
+chown -R www-data:www-data $APP_PATH/storage
 
 
 echo "Test..."
@@ -71,8 +72,8 @@ php artisan migrate --force
 
 
 echo "Reload PHP & Nginx"
-sudo systemctl reload php8.3-fpm
-sudo systemctl reload nginx
+systemctl reload php8.3-fpm
+systemctl reload nginx
 
 # If there were stashed changes, apply them back
 git stash pop || true
