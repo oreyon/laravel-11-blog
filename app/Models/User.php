@@ -34,11 +34,14 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // eager loading for relationships tables
+
     /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
      */
+
     protected function casts(): array
     {
         return [

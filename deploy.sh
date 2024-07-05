@@ -26,8 +26,8 @@ source $NVM
 echo "NVM Location: $NVM"
 
 
+echo "BUILDING APP"
 echo "DETECTING PHP"
-echo "Build..."
 cd $APP_PATH || exit
 sudo rm -rf vendor
 
@@ -62,7 +62,7 @@ php artisan cache:clear
 echo "MIGRATING DATABASE"
 php artisan migrate:fresh --seed
 
-echo "Ensure the web server can write to the storage and cache directories"
+echo "CHANGING OWNERSHIP OF STORAGE"
 sudo chown -R www-data:www-data $APP_PATH/storage
 sudo chmod -R 775 $APP_PATH/storage
 

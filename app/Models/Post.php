@@ -11,6 +11,9 @@ class Post extends Model
     use HasFactory;
     protected $fillable = ['title', 'slug', 'author_id', 'body', 'category_id'];
 
+    // eager loading for relationships tables
+    protected $with = ['author', 'category'];
+
     public static function find($slug)
     {
         return self::all()->firstWhere('slug', $slug);
